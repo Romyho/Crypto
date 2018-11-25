@@ -27,19 +27,19 @@ Infosheet(1):
 
 Infosheet(2):
 + prijs usd (Stream graph)
-+ Ranking (Line graph)
++ Ranking (Scatter plot)
 + Recente nieuws koppen
 + Totale markt (Pie chart)
 
 ### Visual Sketch
-![sketch]()
+![sketch](website design.png)
 
 ## Main Features
 + Interactive bubble Bubbelchart(MVP)
 Weergave van de totale markt, de grootte van de bubbel weergeeft de grootte op de markt.
 + Interactive Stream graph(MVP)
 Weergeeft prijs in usd over tijd.
-+ Interactive Line graph(MVP)
++ Interactive Scatter plot(MVP)
 Weergeeft ranking over tijd.
 + Pie chart(Optional)
 Weergave van totale markt
