@@ -32,7 +32,7 @@ Infosheet(2):
 + Totale markt (Pie chart)
 
 ### Visual Sketch
-![sketch](website design.png)
+![sketch](documents/github/crypto/website_design.png)
 
 ## Main Features
 + Interactive bubble Bubbelchart(MVP)
