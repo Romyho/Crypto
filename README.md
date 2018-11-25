@@ -11,7 +11,7 @@ Er is veel data beschikbaar over crypto currency. Er is geen tussenpersoon of ve
 Het visualiseren van ontwikkelingen van crypto currency, tussen 2013-2018, door de groei van de crypto currency markt te weergeven en specifieke informatie per currency.
 
 ## Website
-..* Hele markt in bubbels van currencies weergeven, de grootte van de bubbel staat voor de grootte op de markt.(Bubbelchart)
++ Hele markt in bubbels van currencies weergeven, de grootte van de bubbel staat voor de grootte op de markt.(Bubbelchart)
 + Per currency een kleine infosheet(1) als de muis er op staat.
 + Uitgebreide infosheet(2) als er op een currency geklikt wordt.
 Vanuit infosheet(2), kan er via dropdown menu's gewisselt worden tussen currencies en jaar veranderd worden.
