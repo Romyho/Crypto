@@ -66,3 +66,5 @@ Ctypto visualisatie kan je vinden op [Elementus](https://elementus.io/token-sale
 ### Hardest Parts
 + De informatie zo duidelijk mogelijk weergeven
 + Website design
++ Nieuws items interactief/up to date, api acces
++
