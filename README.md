@@ -32,7 +32,7 @@ Infosheet(2):
 + Totale markt (Pie chart)
 
 ### Visual Sketch
-![sketch](documents/website_design.png)
+![sketch](doc/website_design.png)
 
 ## Main Features
 + Interactive bubble Bubbelchart(MVP)
