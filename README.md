@@ -49,6 +49,10 @@ Kies currencies om te vergelijken
 Kies jaar.
 + Slider(Optional)
 Verschuiven van tijdspan
++ Nieuws
+van vast gesteld moment, nieuws items
+(Optional, actuele nieuws items)
+
 
 ## Prerequisites
 ### Data
