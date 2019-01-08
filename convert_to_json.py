@@ -10,6 +10,10 @@ def convert(file_name):
     csv_name = file_name[0]
     df = pd.read_csv(csv_name)
 
+    top100 = list(range(67420))
+    df1 = df.loc[top100]
+    # print(df1)
+    #
 
     # Make dictionary, write to json structure
     data = df1.to_dict('response')

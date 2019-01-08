@@ -58,7 +58,7 @@ weergave van open, close, high en low rate per dag over de tijdspan
 
 ## Prerequisites
 ### Data
-[Every Cryptocurrency Daily Market Price](https://www.kaggle.com/jessevent/all-crypto-currencies/kernels). Dit de enige data die nodig is voor de visualisatie.
+[Every Cryptocurrency Daily Market Price](https://www.kaggle.com/jessevent/all-crypto-currencies/kernels). Dit de enige data die nodig is voor de visualisatie. Hierbij wordt alleen de top 100 uit de ranking geselecteerd. 
 
 ### External components
 - [D3](https://d3js.org/)
