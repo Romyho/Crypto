@@ -52,6 +52,8 @@ Verschuiven van tijdspan
 + Nieuws
 van vast gesteld moment, nieuws items
 (Optional, actuele nieuws items)
++ In plaats van stream graph, candle graph
+weergave van open, close, high en low rate per dag over de tijdspan
 
 
 ## Prerequisites
