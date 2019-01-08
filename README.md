@@ -58,7 +58,7 @@ van vast gesteld moment, nieuws items
 ### Data
 [Every Cryptocurrency Daily Market Price](https://www.kaggle.com/jessevent/all-crypto-currencies/kernels). Dit de enige data die nodig is voor de visualisatie.
 
-### external components
+### External components
 - [D3](https://d3js.org/)
 - [D3-tip](https://github.com/Caged/d3-tip)
 - [Atom](atom.io)
