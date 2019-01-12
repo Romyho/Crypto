@@ -14,6 +14,14 @@ window.onload = function() {
   // console.log('ja')
   var data = $.getJSON("crypto-markets.json", function(respons) {
 
+    // Set tooltips
+    var tip = d3.tip()
+                .attr('class', 'd3-tip')
+                .offset([-10, 0])
+                .html(function(d) {
+                  console.log(d)
+                  return "<strong>Currency: </strong><span class='details'>" +    d.data[0] + "<br></span>" + "<strong>Market value: </strong><span class='details'>" + d.data[1] + "<br></span>" + "<strong>current price: </strong><span class='details'>" + d.data[2] + "<br></span>" + "<strong>Ranking: </strong><span class='details'>" + d.data[3]+"<br></span>";
+                })
   var cryptoData = respons
 
   var crypto = {};
@@ -53,7 +61,7 @@ window.onload = function() {
         }
       }
     }
-    bubble('2018-11-28', crypto)
+bubble('2018-11-28', crypto)
       // console.log(crypto)
 function bubble(datum,crypto){
   var diameter = 600;
@@ -65,11 +73,11 @@ function bubble(datum,crypto){
   for (i in crypto){
        for (j in crypto[i].dates){
          if(j == datum)
-             market.push([crypto[i].info.symbol,crypto[i].dates[j].market])
+             market.push([crypto[i].info.symbol,crypto[i].dates[j].market,crypto[i].dates[j].close,crypto[i].info.ranking])
            }
          }
 
-
+console.log(market[0])
   var data = {'children':market}
 
   var bubble = d3.pack(data)
@@ -81,6 +89,8 @@ function bubble(datum,crypto){
       .attr("width", diameter)
       .attr("height", diameter)
       .attr("class", "bubble");
+
+  svg.call(tip)
 
   var nodes = d3.hierarchy(data)
                 .sum(function(d){
@@ -110,6 +120,23 @@ function bubble(datum,crypto){
           })
           .style("fill", function(d,i) {
               return color(i);
+          })
+          .on('mouseover',function(d){
+            tip.show(d);
+
+            d3.select(this)
+              .style("opacity", 1)
+              .style("stroke","white")
+              .style("stroke-width",3);
+          })
+          .on('mouseout', function(d){
+            tip.hide(d);
+
+            d3.select(this)
+              .style("opacity", 0.8)
+              .style("stroke","white")
+              .style("stroke-width",0.3);
+
           });
   //
   node.append("text")
@@ -148,6 +175,20 @@ function bubble(datum,crypto){
      //    .domain([d3.min(values)-0.5, d3.max(values)+0.5])
      //    .range([height, padding]);
 }
+
+// Parse the date / time
+// var parseDate = d3.time.format("%d-%b-%y").parse;
+
+// Set the ranges
+// var x = d3.scaleTime.range([0, diameter]);
+// var y = d3.scaleLinear.range([diameter, 0]);
+//
+// var xAxis = d3.svg.axis().scale(x)
+//     .orient("bottom").ticks(5);
+//
+//     var valueline = d3.svg.line()
+//         .x(function(d) { return x(d.date); })
+//
 
   });
 }
