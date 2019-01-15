@@ -1,70 +1,13 @@
-/* bubbleChart.js
-*
-* Romy Ho
-*
-* 11007303
-*
-* Programmeerproject
-*
-* A javascript file, making a bubble chart
-*
-*/
-
-window.onload = function() {
-  // console.log('ja')
-  var data = $.getJSON("crypto-markets.json", function(respons) {
-
-    // Set tooltips
-    var tip = d3.tip()
-                .attr('class', 'd3-tip')
-                .offset([-10, 0])
-                .html(function(d) {
-                  console.log(d)
-                  return "<strong>Currency: </strong><span class='details'>" +    d.data[0] + "<br></span>" + "<strong>Market value: </strong><span class='details'>" + d.data[1] + "<br></span>" + "<strong>current price: </strong><span class='details'>" + d.data[2] + "<br></span>" + "<strong>Ranking: </strong><span class='details'>" + d.data[3]+"<br></span>";
-                })
-  var cryptoData = respons
-
-  var crypto = {};
-  var dates = {};
-  var total = {};
-  var high = [];
-  var low = [];
-  var open = [];
-  var close = [];
-  var market = [];
-  var symbol = [];
-  var ranking = [];
-  var name = [];
-  var date =[];
-
-  for (j in cryptoData){
-    high.push(cryptoData[j].high)
-    low.push(cryptoData[j].low)
-    open.push(cryptoData[j].open)
-    close.push(cryptoData[j].close)
-    market.push(cryptoData[j].market)
-    symbol.push(cryptoData[j].symbol)
-    ranking.push(cryptoData[j].ranknow)
-    name.push(cryptoData[j].name)
-    date.push(cryptoData[j].date)
-  }
-
-  for ( i in cryptoData){
-
-      crypto[cryptoData[i].name]={'info':{'symbol':symbol[i], 'ranking': ranking[i]}, 'dates':{} }
-    }
-    for ( j in cryptoData){
-      for(k in crypto){
-
-        if (cryptoData[j].name == k){
-          crypto[k].dates[cryptoData[j].date]={'high':high[j], 'low':low[j], 'open':open[j], 'close':close[j], 'market':market[j]}
-        }
-      }
-    }
-bubble('2018-11-28', crypto)
-      // console.log(crypto)
-function bubble(datum,crypto){
-  var diameter = 600;
+function bubble(datum,crypto, dates){
+  // Set tooltips
+  var tip = d3.tip()
+              .attr('class', 'd3-tip')
+              .offset([-20,100])
+              .html(function(d) {
+                console.log(d)
+                return "<strong>Currency: </strong><span class='details'>" +    d.data[4] + "<br></span>" + "<strong>Market value: </strong><span class='details'>" + d.data[1] + "<br></span>" + "<strong>current price: </strong><span class='details'>" + d.data[2] + "<br></span>" + "<strong>Ranking: </strong><span class='details'>" + d.data[3]+"<br></span>";
+              })
+              
   var color = d3.scaleOrdinal()
                       .domain(crypto)
                       .range(['#9e0142','#d53e4f','#f46d43','#fdae61','#fee08b','#e6f598','#abdda4','#66c2a5','#3288bd','#5e4fa']);
@@ -73,11 +16,10 @@ function bubble(datum,crypto){
   for (i in crypto){
        for (j in crypto[i].dates){
          if(j == datum)
-             market.push([crypto[i].info.symbol,crypto[i].dates[j].market,crypto[i].dates[j].close,crypto[i].info.ranking])
+             market.push([crypto[i].info.symbol,crypto[i].dates[j].market,crypto[i].dates[j].close,crypto[i].info.ranking, i])
            }
          }
 
-console.log(market[0])
   var data = {'children':market}
 
   var bubble = d3.pack(data)
@@ -86,9 +28,11 @@ console.log(market[0])
 
   var svg = d3.select("body")
       .append("svg")
+      .attr('transform', 'translate(150,30)')
       .attr("width", diameter)
       .attr("height", diameter)
       .attr("class", "bubble");
+
 
   svg.call(tip)
 
@@ -125,7 +69,6 @@ console.log(market[0])
             tip.show(d);
 
             d3.select(this)
-              .style("opacity", 1)
               .style("stroke","white")
               .style("stroke-width",3);
           })
@@ -133,11 +76,15 @@ console.log(market[0])
             tip.hide(d);
 
             d3.select(this)
-              .style("opacity", 0.8)
               .style("stroke","white")
               .style("stroke-width",0.3);
 
-          });
+
+          })
+          .on('click', function(d){
+        // update(interestbyCountry[d.properties.name],  d)
+        console.log(d)
+      } );
   //
   node.append("text")
       .attr("dy", ".2em")
@@ -149,7 +96,15 @@ console.log(market[0])
       .attr("font-size", function(d){
           return d.r/5;
       })
-      .attr("fill", "white");
+      .attr("fill", "white")
+      .on('mouseover',function(d){
+        tip.show(d);
+      })
+      .on('mouseout', function(d){
+        tip.hide(d);
+      });
+
+
 
   node.append("text")
       .attr("dy", "1.3em")
@@ -161,34 +116,91 @@ console.log(market[0])
       .attr("font-size", function(d){
           return d.r/5;
       })
-      .attr("fill", "white");
+      .attr("fill", "white")
+      .on('mouseover',function(d){
+        tip.show(d);
 
-  d3.select(self.frameElement)
-      .style("height", diameter + "px");
+      })
+      .on('mouseout', function(d){
+        tip.hide(d);
 
-      // scale x and y axis
-     //  var xScale = d3.scaleOrdinal()
-     //  .domain()
-     //  .range(pad);
-     //
+      });
+
+
+  //
+  // d3.select(dropdown)
+  //   .data(dates)
+  //   .on('click',function(d){
+  //     show(d)
+  //   })
+  // console.log(dates)
+  //   margin = ({top: 20, right: 30, bottom: 30, left: 40})
+  //   var x = d3.scaleTime()
+  //       .domain(dates)
+  //       .range([margin.left, diameter+margin.right])
+  //   console.log(x(dates[0]))
+  //
+  //
+  //   var axis = svg.append("g")
+  //                .attr("class", "x axis")
+  //                .attr("transform", "translate(," + diameter + 50%")")
+  //                .call(d3.axisBottom(x).ticks(10));
+
+
      // var yScale = d3.scaleLinear()
      //    .domain([d3.min(values)-0.5, d3.max(values)+0.5])
      //    .range([height, padding]);
+
+     d3.select(self.frameElement)
+         .style("height", diameter + "px");
 }
 
-// Parse the date / time
-// var parseDate = d3.time.format("%d-%b-%y").parse;
-
-// Set the ranges
-// var x = d3.scaleTime.range([0, diameter]);
-// var y = d3.scaleLinear.range([diameter, 0]);
+// var slider = d3
+//    .sliderHorizontal()
+//    .min(dates[0])
+//    .max(dates[dates.length])
+//    .step(1)
+//    .width(300)
+//    .displayValue(false)
+//    .on('onchange', val => {
+//      d3.select('#value').text(val);
+//    });
 //
-// var xAxis = d3.svg.axis().scale(x)
-//     .orient("bottom").ticks(5);
+//  d3.select('#slider')
+//    .append('svg')
+//    .attr('width', 600)
+//    .attr('height', 700)
+//    .append('g')
+//    .attr('transform', 'translate(30,30)')
+//    .call(slider);
+// var dataTime = []
+// for (i in date){
+// dataTime.push(Date.parse(date[i]))
+// }
 //
-//     var valueline = d3.svg.line()
-//         .x(function(d) { return x(d.date); })
 //
-
-  });
-}
+//   var sliderTime = d3
+//     .sliderBottom()
+//     .min(d3.min(dataTime))
+//     .max(d3.max(dataTime))
+//     .step(1000 * 60 * 60 * 24 * 365)
+//     .width(600)
+//     .tickFormat(d3.timeFormat('%d-%m-%Y'))
+//     .tickValues(dataTime)
+//     // .default(new Date(, 10, 3))
+//     // .on('onchange', val => {
+//     //   d3.select('p#value-time').text(d3.timeFormat('%d-%m-%Y')(val));
+//     // });
+//
+//   var gTime = d3
+//     .select('div#slider-time')
+//     .append('svg')
+//     .attr('width', 600)
+//     .attr('height', 100)
+//     .append('g')
+//     .attr('transform', 'translate(130,30)');
+//
+//   gTime.call(sliderTime);
+//
+//   d3.select('p#value-time').text(d3.timeFormat('%d-%m-%Y')(sliderTime.value()));
+    //

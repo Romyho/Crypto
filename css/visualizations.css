@@ -2,14 +2,19 @@ body, html {
     height: 100%;
     margin: 0;
 }
-.tip {
+.d3-tip{
 position: absolute;
-display: none;
+/* display: none; */
 min-width: 80px;
 height: auto;
 font: 12px sans-serif;
 background: lightsteelblue;
-border: 1px solid #6F257F;
+/* border: 1px solid #6F257F; */
 padding: 14px;
 text-align: center;
+pointer-events: auto;
 }
+/*
+.dropdown{
+  float = right;
+} */

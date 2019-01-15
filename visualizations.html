@@ -15,11 +15,16 @@ A html for the homepage
 	  <title>Top 100 cryptocurrency</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="https://d3js.org/d3.v5.min.js"></script>
+		<<script src="streamgraph.js">
+
+		</script>
 		<script src="bubblechart.js"></script>
+		<script src="mainCharts.js"></script>
 		<script src="d3-tip.js"></script>
+		<script src="https://unpkg.com/d3-simple-slider"></script>
 		<link rel="stylesheet" href="../css/visualizations.css">
 	</head>
 	<body>
@@ -35,9 +40,20 @@ A html for the homepage
 				</ul>
 			</div>
 		</nav>
-    <div class="image">
-      </div>
 
+
+<div class="Time slider">
+    <div class="col-sm-2"><p id="value-time"></p></div>
+    <div class="col-sm"><div id="slider-time"></div></div>
+  </div>
 
 	</body>
 </html>
+<!-- <div class="dropdown ">
+<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dataset
+<span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right ">
+<li><a href="#" onclick="t(1)">Main Science and Technology Indicators</a></li>
+<li><a href="#" onclick="t(2)">Consumer confidence</a></li>
+</ul>
+</div> -->
