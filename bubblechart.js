@@ -7,14 +7,16 @@ function bubble(datum,crypto, dates){
                 console.log(d)
                 return "<strong>Currency: </strong><span class='details'>" +    d.data[4] + "<br></span>" + "<strong>Market value: </strong><span class='details'>" + d.data[1] + "<br></span>" + "<strong>current price: </strong><span class='details'>" + d.data[2] + "<br></span>" + "<strong>Ranking: </strong><span class='details'>" + d.data[3]+"<br></span>";
               })
-              
+
   var color = d3.scaleOrdinal()
                       .domain(crypto)
                       .range(['#9e0142','#d53e4f','#f46d43','#fdae61','#fee08b','#e6f598','#abdda4','#66c2a5','#3288bd','#5e4fa']);
 
   var market = []
+  var date = []
   for (i in crypto){
        for (j in crypto[i].dates){
+         date.push(j)
          if(j == datum)
              market.push([crypto[i].info.symbol,crypto[i].dates[j].market,crypto[i].dates[j].close,crypto[i].info.ranking, i])
            }
@@ -153,7 +155,7 @@ function bubble(datum,crypto, dates){
 
      d3.select(self.frameElement)
          .style("height", diameter + "px");
-}
+
 
 // var slider = d3
 //    .sliderHorizontal()
@@ -173,34 +175,35 @@ function bubble(datum,crypto, dates){
 //    .append('g')
 //    .attr('transform', 'translate(30,30)')
 //    .call(slider);
-// var dataTime = []
-// for (i in date){
-// dataTime.push(Date.parse(date[i]))
-// }
-//
-//
-//   var sliderTime = d3
-//     .sliderBottom()
-//     .min(d3.min(dataTime))
-//     .max(d3.max(dataTime))
-//     .step(1000 * 60 * 60 * 24 * 365)
-//     .width(600)
-//     .tickFormat(d3.timeFormat('%d-%m-%Y'))
-//     .tickValues(dataTime)
-//     // .default(new Date(, 10, 3))
-//     // .on('onchange', val => {
-//     //   d3.select('p#value-time').text(d3.timeFormat('%d-%m-%Y')(val));
-//     // });
-//
-//   var gTime = d3
-//     .select('div#slider-time')
-//     .append('svg')
-//     .attr('width', 600)
-//     .attr('height', 100)
-//     .append('g')
-//     .attr('transform', 'translate(130,30)');
-//
-//   gTime.call(sliderTime);
-//
-//   d3.select('p#value-time').text(d3.timeFormat('%d-%m-%Y')(sliderTime.value()));
-    //
+var dataTime = []
+for (i in date){
+dataTime.push(d3.timeFormat(date[i]))
+}
+
+// console.log(dataTime)
+  //
+  // var sliderTime = d3
+  //   .sliderBottom()
+  //   .min(d3.min(dataTime))
+  //   .max(d3.max(dataTime))
+  //   .step(1000 * 60 * 60 * 24 * 365)
+  //   .width(600)
+  //   .tickFormat(d3.timeFormat('%d-%m-%Y'))
+  //   .tickValues(dataTime)
+  //   // .default(new Date(, 10, 3))
+  //   // .on('onchange', val => {
+  //   //   d3.select('p#value-time').text(d3.timeFormat('%d-%m-%Y')(val));
+  //   // });
+  //
+  // var gTime = d3
+  //   .select('div#slider-time')
+  //   .append('svg')
+  //   .attr('width', 600)
+  //   .attr('height', 100)
+  //   .append('g')
+  //   .attr('transform', 'translate(130,30)');
+  //
+  // gTime.call(sliderTime);
+  //
+  // d3.select('p#value-time').text(d3.timeFormat('%d-%m-%Y')(sliderTime.value()));
+}
