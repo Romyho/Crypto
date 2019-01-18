@@ -17,6 +17,11 @@ A html for the homepage
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="http://d3js.org/d3.v2.js"></script>
+		<script>
+			var d3v2 = jQuery.extend(true, {}, d3)
+
+		</script>
 		<script src="https://d3js.org/d3.v5.min.js"></script>
 		<script src="streamgraph.js"></script>
 		<script src="bubblechart.js"></script>
@@ -45,13 +50,8 @@ A html for the homepage
     <div class="col-sm"><div id="slider-time"></div></div>
   </div>
 
+	<div class="chart">
+	</div>
+
 	</body>
 </html>
-<!-- <div class="dropdown ">
-<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dataset
-<span class="caret"></span></button>
-<ul class="dropdown-menu dropdown-menu-right ">
-<li><a href="#" onclick="t(1)">Main Science and Technology Indicators</a></li>
-<li><a href="#" onclick="t(2)">Consumer confidence</a></li>
-</ul>
-</div> -->

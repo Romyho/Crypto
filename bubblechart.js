@@ -4,7 +4,7 @@ function bubble(datum,crypto, dates){
               .attr('class', 'd3-tip')
               .offset([-20,100])
               .html(function(d) {
-                console.log(d)
+                // console.log(d)
                 return "<strong>Currency: </strong><span class='details'>" +    d.data[4] + "<br></span>" + "<strong>Market value: </strong><span class='details'>" + d.data[1] + "<br></span>" + "<strong>current price: </strong><span class='details'>" + d.data[2] + "<br></span>" + "<strong>Ranking: </strong><span class='details'>" + d.data[3]+"<br></span>";
               })
 
@@ -14,6 +14,7 @@ function bubble(datum,crypto, dates){
 
   var market = []
   var date = []
+
   for (i in crypto){
        for (j in crypto[i].dates){
          date.push(j)
@@ -23,7 +24,7 @@ function bubble(datum,crypto, dates){
          }
 
   var data = {'children':market}
-
+console.log(data)
   var bubble = d3.pack(data)
       .size([diameter, diameter])
       .padding(1.5);
@@ -51,7 +52,6 @@ function bubble(datum,crypto, dates){
       .append("g")
       .attr("class", "node")
       .attr("transform", function(d) {
-        // console.log(d)
           return "translate(" + d.x + "," + d.y + ")";
       });
 
@@ -84,8 +84,8 @@ function bubble(datum,crypto, dates){
 
           })
           .on('click', function(d){
-        // update(interestbyCountry[d.properties.name],  d)
-        console.log(d)
+            // console.log(d.data[4])
+        chart(crypto[d.data[4]], "orange");
       } );
   //
   node.append("text")
@@ -129,12 +129,6 @@ function bubble(datum,crypto, dates){
       });
 
 
-  //
-  // d3.select(dropdown)
-  //   .data(dates)
-  //   .on('click',function(d){
-  //     show(d)
-  //   })
   // console.log(dates)
   //   margin = ({top: 20, right: 30, bottom: 30, left: 40})
   //   var x = d3.scaleTime()
@@ -147,11 +141,6 @@ function bubble(datum,crypto, dates){
   //                .attr("class", "x axis")
   //                .attr("transform", "translate(," + diameter + 50%")")
   //                .call(d3.axisBottom(x).ticks(10));
-
-
-     // var yScale = d3.scaleLinear()
-     //    .domain([d3.min(values)-0.5, d3.max(values)+0.5])
-     //    .range([height, padding]);
 
      d3.select(self.frameElement)
          .style("height", diameter + "px");
@@ -206,4 +195,67 @@ dataTime.push(d3.timeFormat(date[i]))
   // gTime.call(sliderTime);
   //
   // d3.select('p#value-time').text(d3.timeFormat('%d-%m-%Y')(sliderTime.value()));
+  // console.log(dataTime)
+  // slider(date)
 }
+
+// function slider(dates){
+//       var date =  Array.from(new Set(dates));
+//
+//   // var formatDateIntoYear = d3.timeFormat("%Y");
+// var formatDate = d3.timeFormat("%b %Y");
+//
+// // var startDate = new Date("2004-11-01"),
+// //     endDate = new Date("2017-04-01");
+// var date = formatDate(date)
+// console.log(date);
+//
+//
+// var margin = {top:0, right:50, bottom:0, left:50},
+//     width = 960 -margin.left - margin.right,
+//     height = 500 - margin.top - margin.bottom;
+//
+// var svg = d3.select("#slider")
+//     .append("svg")
+//     .attr("width", width + margin.left + margin.right)
+//     .attr("height", height);
+//
+// var x = d3.scaleTime()
+//     .domain([startDate, endDate])
+//     .range([0, width])
+//     .clamp(true);
+//
+// var slider = svg.append("g")
+//     .attr("class", "slider")
+//     .attr("transform", "translate(" + margin.left + "," + height / 2 + ")");
+//
+// slider.append("line")
+//     .attr("class", "track")
+//     .attr("x1", x.range()[0])
+//     .attr("x2", x.range()[1])
+//   .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+//     .attr("class", "track-inset")
+//   .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+//     .attr("class", "track-overlay")
+//     .call(d3.drag()
+//         .on("start.interrupt", function() { slider.interrupt(); })
+//         .on("start drag", function() { hue(x.invert(d3.event.x)); }));
+//
+// slider.insert("g", ".track-overlay")
+//     .attr("class", "ticks")
+//     .attr("transform", "translate(0," + 18 + ")")
+//   .selectAll("text")
+//     .data(x.ticks(10))
+//     .enter()
+//     .append("text")
+//     .attr("x", x)
+//     .attr("y", 10)
+//     .attr("text-anchor", "middle")
+//     .text(function(d) { return formatDateIntoYear(d); });
+//
+// var label = slider.append("text")
+//     .attr("class", "label")
+//     .attr("text-anchor", "middle")
+//     .text(formatDate(startDate))
+//     .attr("transform", "translate(0," + (-25) + ")")
+// }

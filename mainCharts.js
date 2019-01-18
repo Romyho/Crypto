@@ -59,7 +59,8 @@ window.onload = function() {
 bubble('2018-11-28', crypto, date)
 
 
-chart(crypto['Bitcoin'], "orange");
+// chart(crypto['Bitcoin'], "orange");
+// streamGraph("test.csv", "orange")
 
 
   });
