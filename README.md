@@ -2,63 +2,59 @@
 
 
 ## Introductie
-Crypto currency wordt steeds groter en groter, maar er is eigelijk nog niet zo veel over bekend. Het is niet tastbaar en alleen onderling verhandelbaar, zonder tussenpersoon. Welke currencies bestaan er nou, is de markt wisselvallig of juist constant(stijgend?).
+Crypto currency is getting bigger, but there is not much information about it. It's not tangible and only mutually tradable, without a middleman. Which currencies exist and is the market changeable or constant (rising?).
 
-## Probleem
-Er is veel data beschikbaar over crypto currency. Doordat er is geen tussenpersoon of verhandelaar die de markt overzichterlijk maakt, wordt de markt minder toegangekelijk voor nieuwe investeerder en handelaren.
+## Problem
+There is a lot of data available about crypto currency. Because there is no middleman or trader who makes the market more clear, the market is less accessible and interesting for new investors and traders.
 
 ## Oplossing
-Het visualiseren van ontwikkelingen van crypto currency en specifieke informatie per currency, tussen 2013-2018.
+The visualization of the developments of crypto currency and specific information per currency, between 2013-2018.
 
 ## Website
-+ Hele markt in bubbels van currencies weergeven, de grootte van de bubbel staat voor de grootte op de markt.(Bubbelchart)
-+ Per currency een kleine infosheet(1) als de muis er op staat.
-+ Uitgebreide infosheet(2) als er op een currency geklikt wordt.
-Vanuit infosheet(2), kan er via dropdown menu's gewisselt worden tussen currencies en kan het jaar veranderd worden.
-+ Vergelijken van meerdere currencies infosheet(2), weergeef dit voor geselecteerde currencies.
++ The whole market in bubbles of currencies, the biggest bubble is the bubble with the largest market value.(bubblechart)
+  With a time slider the user can choose the time of the bubblechart.
++ Each currency has a little information sheet(1), when mouse is over the bubble.
++ An extensive information sheet(2), when clicked on bubble.
+  Within infomation sheet(2), the user can select currencies, or change them.
+
 
 
 Infosheet(1):
-+ Begin van currency
-+ Huidige prijs usd
-+ Huidige ranking
-+ Omvang in de markt
++ Begin date og currency
++ Current price usd
++ Ranking
++ Market coverage
 
 
 Infosheet(2):
-+ prijs usd (Stream graph)
-+ Ranking (Scatter plot)
-+ Recente nieuws koppen
-+ Totale markt (Pie chart)
++ price usd (Stream graph)
++ Recent news items
++ Total market (Pie chart)
 
 ### Visual Sketch
 ![sketch](doc/website_design.png)
 
 ## Main Features
 + Interactive bubble Bubbelchart(MVP)
-Weergave van de totale markt, de grootte van de bubbel weergeeft de grootte op de markt.
+The whole market in bubbles of currencies, the biggest bubble is the bubble with the largest market value.
 + Interactive Stream graph(MVP)
-Weergeeft prijs in usd over tijd.
-+ Interactive Scatter plot(MVP)
-Weergeeft ranking over tijd.
+Shows price in usd over time.
++ Interactive line chart(MVP)
+Shows market coverage over time.
 + Pie chart(Optional)
-Weergave van totale markt
+Total market
 + Checkbox(MVP)
-Kies currencies om te vergelijken
-+ Dropdown menu(MVP)
-Kies jaar.
-+ Slider(Optional)
-Verschuiven van tijdspan
-+ Nieuws
-van vast gesteld moment, nieuws items
-(Optional, actuele nieuws items)
-+ In plaats van stream graph, candle graph
-weergave van open, close, high en low rate per dag over de tijdspan
-
+Choose currencies to compare.
++ Time Slider(MVP)
+Choose time
++ News
+Show news items
++ Candle graph(Optional)
+Show open, close, high en low rate per day.
 
 ## Prerequisites
 ### Data
-[Every Cryptocurrency Daily Market Price](https://www.kaggle.com/jessevent/all-crypto-currencies/kernels). Dit de enige data die nodig is voor de visualisatie. Hierbij wordt alleen de top 100 uit de ranking geselecteerd. 
+[Every Cryptocurrency Daily Market Price](https://www.kaggle.com/jessevent/all-crypto-currencies/kernels). This is the only used data, i will only use the top 100 ranked crypto currencies.
 
 ### External components
 - [D3](https://d3js.org/)
@@ -66,7 +62,7 @@ weergave van open, close, high en low rate per dag over de tijdspan
 - [Atom](atom.io)
 
 ### Simular visualisation
-Ctypto visualisatie kan je vinden op [Elementus](https://elementus.io/token-sales-history). Elementus, maakt gebruik van D3 en ajax, een slider en histogrammen ineen. In deze bewegende visualisatie kan je goed de groei van de cryptocurrency markt zien, maar verder geen details over de currencies.
+Crypto visualisatie [Elementus](https://elementus.io/token-sales-history). Elementus, uses D3 en ajax, slider.  In the moving visualization the total market expansion is clearly visible, but no further details about the currencies.
 
 
 ### Hardest Parts
