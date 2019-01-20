@@ -4,7 +4,6 @@ function bubble(datum,crypto, dates){
               .attr('class', 'd3-tip')
               .offset([-20,100])
               .html(function(d) {
-                // console.log(d)
                 return "<strong>Currency: </strong><span class='details'>" +    d.data[4] + "<br></span>" + "<strong>Market value: </strong><span class='details'>" + d.data[1] + "<br></span>" + "<strong>current price: </strong><span class='details'>" + d.data[2] + "<br></span>" + "<strong>Ranking: </strong><span class='details'>" + d.data[3]+"<br></span>";
               })
 

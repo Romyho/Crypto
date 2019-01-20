@@ -9,7 +9,7 @@
 * A javascript file, making a bubble chart
 *
 */
-var diameter = 600;
+
 window.onload = function() {
 
   var data = $.getJSON("crypto-markets.json", function(respons) {
