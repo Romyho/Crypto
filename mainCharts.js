@@ -39,7 +39,7 @@ window.onload = function() {
     symbol.push(cryptoData[j].symbol)
     ranking.push(cryptoData[j].ranknow)
     name.push(cryptoData[j].name)
-    date.push(cryptoData[j].date)
+    date.push((cryptoData[j].date))
   }
 
   for ( i in cryptoData){
@@ -47,23 +47,23 @@ window.onload = function() {
       crypto[cryptoData[i].name]={'info':{'symbol':symbol[i], 'ranking': ranking[i]}, 'dates':{} }
     }
     for ( j in cryptoData){
+      // console.log(new Date(cryptoData[j].date))
       for(k in crypto){
-
+        // console.log(cryptoData[j].date);
         if (cryptoData[j].name == k){
-          crypto[k].dates[cryptoData[j].date]={'high':high[j], 'low':low[j], 'open':open[j], 'close':close[j], 'market':market[j]}
-        }
+          crypto[k].dates[ (cryptoData[j].date)]={'high':high[j], 'low':low[j], 'open':open[j], 'close':close[j], 'market':market[j]}
+
       }
     }
+}
 
-
-bubble('2018-11-28', crypto, date)
-
-
-// chart(crypto['Bitcoin'], "orange");
-// streamGraph("test.csv", "orange")
-
-
+bubbleData( crypto, date[0])
+var begin = new Date (date[0]),
+    end = new Date (date[(date.length-1)]);
+timeSlider(begin, end, crypto)
+chart(crypto['Bitcoin'], "orange", date);
   });
+
 }
 
 
