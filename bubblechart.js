@@ -1,61 +1,52 @@
-
-
 function bubbleData(crypto, datum){
-  // console.log('new data');
-  // console.log(datum);
+
   var market = []
   var date = []
-// console.log(crypto);
+
   for (i in crypto){
        for (j in crypto[i].dates){
          date.push(j)
-         // console.log(crypto[i].dates)
          if(j == datum){
-         // console.log(i);
-         // console.log(datum);
-             market.push([crypto[i].info.symbol,crypto[i].dates[j].market,crypto[i].dates[j].close,crypto[i].info.ranking, i])
+             market.push([crypto[i].info.symbol,crypto[i].dates[j].market,crypto[i].dates[j].close,crypto[i].info.ranking, i, crypto[i].info.begin])
            }
          }
        }
 
-
   var data = {'children':market}
-  // console.log(data);
   bubble(data,crypto,date)
-
 }
+
 function bubble(data,crypto,date){
-
-
-  // console.log(datum);
   var diameter = 600
-  // Set tooltips
-  var tip = d3.tip()
-              .attr('class', 'd3-tip')
-              .offset([-20,100])
-              .html(function(d) {
-                return "<strong>Currency: </strong><span class='details'>" +    d.data[4] + "<br></span>" + "<strong>Market value: </strong><span class='details'>" + d.data[1] + "<br></span>" + "<strong>current price: </strong><span class='details'>" + d.data[2] + "<br></span>" + "<strong>Ranking: </strong><span class='details'>" + d.data[3]+"<br></span>";
-              })
+
+  var tooltip = d3.select("body")
+      .append("div")
+      .attr("class", "tipBubble")
+      .style("position", "absolute")
+      .style("visibility", "visible")
+      .style("top", "200px")
+      .style("left", "10px")
+
+tooltip.html("<strong> Bubble information <br></strong>")
+
+
+tooltip.html("<FONT SIZE='5'> Bubble information <br></FONT>"+ "<br>" +" <strong>Currency: <br></strong>" + "<strong>Market value: <br></strong> " + "<strong>Current price: <br></strong>" + "<strong>Begin date: <br></strong>"+ "<strong>Ranking: <br></strong>")
+
 
   var color = d3.scaleOrdinal()
                       .domain(data)
                       .range(['#9e0142','#d53e4f','#f46d43','#fdae61','#fee08b','#e6f598','#abdda4','#66c2a5','#3288bd','#5e4fa']);
 
-// console.log(crypto)
   var bubble = d3.pack(data)
       .size([diameter, diameter])
       .padding(1.5);
 
   var svg = d3.select(".bubble")
       .append("svg")
-      .attr('transform', 'translate(150,30)')
+      .attr('transform', 'translate(280,30)')
       .attr("width", diameter)
       .attr("height", diameter)
       .attr("class", "bubbles");
-
-
-  svg.call(tip)
-
 
   var nodes = d3.hierarchy(data)
                 .sum(function(d){
@@ -71,7 +62,7 @@ function bubble(data,crypto,date){
       .attr("class", "node")
       .attr("transform", function(d) {
           return "translate(" + d.x + "," + d.y + ")";
-      });
+      })
 
       node.append("title")
           .text(function(d) {
@@ -86,24 +77,19 @@ function bubble(data,crypto,date){
               return color(i);
           })
           .on('mouseover',function(d){
-            tip.show(d);
-
+              tooltip.style("visibility", "visible")
+                     .html("<FONT SIZE='5'> Bubble information <br></FONT>"+ "<br>" +"<strong>Currency: </strong><span class='details'>" +    d.data[4] + "<br></span>" + "<strong>Market value: </strong><span class='details'>" + d.data[1] + "<br></span>" + "<strong>Current price: </strong><span class='details'>" + d.data[2] + "<br></span>" + "<strong>Begin date: </strong><span class='details'>" + d.data[5]+"<br></span>"+ "<strong>Ranking: </strong><span class='details'>" + d.data[3]+"<br></span>")
             d3.select(this)
               .style("stroke","white")
-              .style("stroke-width",3);
+              .style("stroke-width",3)
           })
           .on('mouseout', function(d){
-            tip.hide(d);
-
+           tooltip.html("<FONT SIZE='5'> Bubble information <br></FONT>"+ "<br>" +"<strong>Currency: <br></strong>" + "<strong>Market value: <br></strong> " + "<strong>Current price: <br></strong>" + "<strong>Begin date: <br></strong>"+ "<strong>Ranking: <br></strong>")
             d3.select(this)
               .style("stroke","white")
               .style("stroke-width",0.3);
-
-
           })
           .on('click', function(d){
-            // console.log(d.data[4])
-
             updateStream(d.data[4], crypto)
       } );
   //
@@ -120,19 +106,23 @@ function bubble(data,crypto,date){
       })
       .attr("fill", "white")
       .on('mouseover',function(d){
-        tip.show(d);
+          tooltip.style("visibility", "visible")
+                 .html("<FONT SIZE='5'> Bubble information <br></FONT>"+ "<br>" +"<strong>Currency: </strong><span class='details'>" +    d.data[4] + "<br></span>" + "<strong>Market value: </strong><span class='details'>" + d.data[1] + "<br></span>" + "<strong>Current price: </strong><span class='details'>" + d.data[2] + "<br></span>" + "<strong>Begin date: </strong><span class='details'>" + d.data[5]+"<br></span>"+ "<strong>Ranking: </strong><span class='details'>" + d.data[3]+"<br></span>")
       })
       .on('mouseout', function(d){
-        tip.hide(d);
-      });
-
+       tooltip.html("<FONT SIZE='5'> Bubble information <br></FONT>"+ "<br>" +"<strong>Currency: <br></strong>" + "<strong>Market value: <br></strong> " + "<strong>Current price: <br></strong>" + "<strong>Begin date: <br></strong>"+ "<strong>Ranking: <br></strong>")
+      })
+      .on('click', function(d){
+        updateStream(d.data[4], crypto)
+  } );
 
 
   node.append("text")
       .attr("dy", "1.3em")
       .style("text-anchor", "middle")
       .text(function(d) {
-          return d.data[1];
+        var number = d.data[1]/1000000
+          return  number.toFixed(1) + "M";
       })
       .attr("font-family",  "Gill Sans", "Gill Sans MT")
       .attr("font-size", function(d){
@@ -140,154 +130,20 @@ function bubble(data,crypto,date){
       })
       .attr("fill", "white")
       .on('mouseover',function(d){
-        tip.show(d);
-
+          tooltip.style("visibility", "visible")
+                 .html("<FONT SIZE='5'> Bubble information <br></FONT>"+ "<br>" +"<strong>Currency: </strong><span class='details'>" +    d.data[4] + "<br></span>" + "<strong>Market value: </strong><span class='details'>" + d.data[1] + "<br></span>" + "<strong>Current price: </strong><span class='details'>" + d.data[2] + "<br></span>" + "<strong>Begin date: </strong><span class='details'>" + d.data[5]+"<br></span>"+ "<strong>Ranking: </strong><span class='details'>" + d.data[3]+"<br></span>")
       })
       .on('mouseout', function(d){
-        tip.hide(d);
+       tooltip.html("<FONT SIZE='5'> Bubble information </FONT>"+"<br>" +"<strong>Currency: <br></strong>" + "<strong>Market value: <br></strong> " + "<strong>Current price: <br></strong>" + "<strong>Begin date: <br></strong>"+ "<strong>Ranking: <br></strong>")
+      })
+      .on('click', function(d){
+        updateStream(d.data[4], crypto)
+  } );
 
-      });
+
 
      d3.select(self.frameElement)
          .style("height", diameter + "px");
 
-
-
-}
-
-function timeSlider(startDate, endDate, crypto){
-  // console.log(crypto);
-
-  var formatDateIntoYear = d3.timeFormat("%Y");
-  var formatDate = d3.timeFormat("%d %b %Y");
-  // var inverParse = d3.invert(endDate)
-
-// console.log(inverParse);
-// console.log(dataTime.length);
-var margin = {top:50, right:50, bottom:0, left:50},
-    width = 960 - margin.left - margin.right,
-    height = 100 - margin.top - margin.bottom;
-
-var svg = d3.select("#vis")
-    .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom);
-
-////////// slider //////////
-
-var moving = false;
-var currentValue = 0;
-var targetValue = width;
-
-var playButton = d3.select("#play-button");
-
-var x = d3.scaleTime()
-    .domain([startDate, endDate])
-    .range([0, targetValue])
-    .clamp(true);
-
-var slider = svg.append("g")
-    .attr("class", "slider")
-    .attr("transform", "translate(" + margin.left + "," + height + ")");
-
-slider.append("line")
-    .attr("class", "track")
-    .attr("x1", x.range()[0])
-    .attr("x2", x.range()[1])
-  .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
-    .attr("class", "track-inset")
-  .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
-    .attr("class", "track-overlay")
-    .call(d3.drag()
-        .on("start.interrupt", function() { slider.interrupt(); })
-        .on("start drag", function() {
-          currentValue = d3.event.x;
-          updateBubble(x.invert(currentValue),crypto);
-          // console.log(x.invert(currentValue));
-        })
-    );
-
-slider.insert("g", ".track-overlay")
-    .attr("class", "ticks")
-    .attr("transform", "translate(0," + 18 + ")")
-  .selectAll("text")
-    .data(x.ticks(10))
-    .enter()
-    .append("text")
-    .attr("x", x)
-    .attr("y", 10)
-    .attr("text-anchor", "middle")
-    .text(function(d) { return formatDateIntoYear(d); });
-
-var handle = slider.insert("circle", ".track-overlay")
-    .attr("class", "handle")
-    .attr("r", 9);
-
-var label = slider.append("text")
-    .attr("class", "label")
-    .attr("text-anchor", "middle")
-    .text(formatDate(startDate))
-    .attr("transform", "translate(0," + (-25) + ")")
-
-
-  playButton
-    .on("click", function() {
-    var button = d3.select(this);
-    if (button.text() == "Pause") {
-      moving = false;
-      clearInterval(timer);
-      // timer = 0;
-      button.text("Play");
-    } else {
-      moving = true;
-      timer = setInterval(step, 200);
-      button.text("Pause");
-    }
-    console.log("Slider moving: " + moving);
-  })
-
-
-
-function step() {
-  updateBubble(x.invert(currentValue),crypto);
-  currentValue = currentValue + (targetValue/151);
-  if (currentValue > targetValue) {
-    moving = false;
-    currentValue = 0;
-    clearInterval(timer);
-    // timer = 0;
-    playButton.text("Play");
-    console.log("Slider moving: " + moving);
-  }
-}
-
-
-// console.log(crypto);
-function updateBubble(h) {
-  d3.selectAll('.bubbles').remove()
-  // console.log(dataset);
-  // update position and text of label according to slider scale
-  handle.attr("cx", x(h));
-  label
-    .attr("x", x(h))
-    .text(formatDate(h));
-  var parseDate = d3.timeFormat("%Y-%m-%d")
-  h = parseDate(h);
-
-  bubbleData(crypto, h);
-  // console.log(data);
-}
-
-}
-
-function updateStream(currency,crypto){
-
-  d3.selectAll('.streamgraph').remove()
-  chart(crypto[currency], "orange")
-  // var svg =  d3.select(".streamgraph").transition()
-  // //
-  // //                       svg2.select(".layer")
-  //                       .duration(200)
-  //                       .attr("d",node(dataset_new))
 
 }

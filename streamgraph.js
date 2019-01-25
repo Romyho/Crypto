@@ -1,94 +1,91 @@
 var datearray = [];
 var colorrange = [];
-// var dataa = []
+//
 
-function chart(data, color, date) {
+
+
+function streamChart(data) {
   console.log(data);
-
-  if (color == "blue") {
-    colorrange = ["#045A8D", "#2B8CBE", "#74A9CF", "#A6BDDB", "#D0D1E6", "#F1EEF6"];
-  }
-  else if (color == "pink") {
-    colorrange = ["#980043", "#DD1C77", "#DF65B0", "#C994C7", "#D4B9DA", "#F1EEF6"];
-  }
-  else if (color == "orange") {
-    colorrange = ["#B30000", "#E34A33", "#FC8D59", "#FDBB84", "#FDD49E", "#FEF0D9"];
-  }
-  strokecolor = colorrange[0];
-
-  var format = d3.timeFormat("%m/%d/%y");
-
-  var margin = {top: 200, right: 400, bottom: 300, left: 300};
-  var width = document.body.clientWidth - margin.left - margin.right;
-  var height = 400 - margin.top - margin.bottom;
-
+    var formatDate = d3.timeFormat("%d %b %Y")
   var tooltip = d3.select("body")
       .append("div")
-      .attr("class", "remove")
+      .attr("class", "tipStream")
       .style("position", "absolute")
       .style("z-index", "20")
       .style("visibility", "hidden")
-      .style("top", "30px")
-      .style("left", "55px");
-
-
-      datum = data.dates
-
-      var x = d3v2.time.scale()
-          .range([0, width]);
-
-      var y = d3v2.scale.linear()
-          .range([height-10, 0]);
-
-      var z = d3v2.scale.ordinal()
-          .range(colorrange);
-
-
-      var xAxis = d3v2.svg.axis()
-          .scale(x)
-          .orient("bottom")
-          .ticks(d3v2.time.days);
-
-      var yAxis = d3v2.svg.axis()
-          .scale(y);
-
-      var yAxisr = d3v2.svg.axis()
-          .scale(y);
+      // .style("top", "30px")
+      // .style("left", "55px");
 
 
 
+  colorrange = ["#B30000", "#E34A33", "#FC8D59", "#FDBB84", "#FDD49E", "#FEF0D9"];
+  strokecolor = colorrange[0];
 
-  var format = d3v2.time.format("%Y-%m-%d")	;
 
-  superlijst = [{"key": "high", "values": []}, {"key": "low", "values": []}, {"key": "open", "values": []},{"key": "close", "values": []}]
+var margin = {top: 20, right: 40, bottom: 30, left: 30};
+var width = document.body.clientWidth - margin.left - margin.right;
+var height = 100 - margin.top - margin.bottom; //100 - margin.top - margin.bottom
+
+datum = data.dates
+
+
+var z = d3v2.scale.ordinal()
+            .range(colorrange);
+
+  dataset = [{"key": "low", "values": []},{"key": "close", "values": []},{"key": "open", "values": []},{"key": "high", "values": []}]
+
+  var low = []
+  var high = []
+  var open = []
+  var close = []
 
   for (d in datum){
-    // console.log(datum[d]);
-    superlijst.forEach(function(lijst){
-      if (lijst.key == "high"){
-        lijst.values.push({"key": "high", "value": datum[d]["high"], "date": new Date(d)})
+
+    low.push(datum[d]['low'])
+    open.push(datum[d]['open'])
+    close.push(datum[d]['close'])
+    high.push(datum[d]['high'])
+
+
+    dataset.forEach(function(data){
+      if (data.key == "high"){
+        data.values.push({"key": "high", "value": datum[d]["high"], "date": new Date(d)})
       }
-      else if (lijst.key == 'open') {
-        lijst.values.push({"key": "open", "value": datum[d]["open"], "date": new Date(d)})
+      else if (data.key == 'open') {
+        data.values.push({"key": "open", "value": datum[d]["open"], "date": new Date(d)})
       }
-      else if(lijst.key == 'low'){
-        lijst.values.push({"key": "low", "value": datum[d]["low"], "date": new Date(d)})
+      else if(data.key == 'low'){
+        data.values.push({"key": "low", "value": datum[d]["low"], "date": new Date(d)})
       }
       else{
-        lijst.values.push({"key": "close", "value": datum[d]["close"], "date": new Date(d)})
+        data.values.push({"key": "close", "value": datum[d]["close"], "date": new Date(d)})
       }
     })
   }
 
+  var x = d3.scaleTime()
+      .range([100, width-500])
+      .domain(d3.extent(dataset[0].values, function(d) {return d.date; }));
 
-  x.domain(d3.extent(superlijst[0].values, function(d) {return d.date; }));
+
+      var min = d3.min(low)
+
+      var max = d3.max(high)
+
+        var y = d3.scaleLinear()
+            .range([height-10, 0])
+            .domain([min, max]);
+
+
+  var xAxis = d3.axisBottom()
+                .scale(x)
+
 
   var svg = d3v2.select(".chart").append("svg")
       .attr('class', 'streamgraph')
       .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-      .attr("transform", "translate(" + 50 + "," + margin.top/2 + ")");
+      .attr("height", 8*height + margin.top + margin.bottom)
+
 
       var stack = d3v2.layout.stack()
         .offset("silhouette")
@@ -96,8 +93,7 @@ function chart(data, color, date) {
         .x(function(d) { return d.date; })
         .y(function(d) { return d.value; });
 
-        var layers = stack((superlijst));
-
+        var layers = stack((dataset));
 
 
     var areaK = d3v2.svg.area()
@@ -107,107 +103,113 @@ function chart(data, color, date) {
         .y1(function(d) { return y(d.y0 + d.y); });
 
 
-// console.log(superlijst)
-var value = []
-for (i in superlijst){
-  for (j in superlijst[i]){
-    for(k in superlijst[i][j]){
-          value.push(superlijst[i][j][k].value);
-    }
-
-  }
-}
-y.domain([0, d3.max(value)]);
-
-svg.selectAll(".layer")
-    .data(layers)
-  .enter().append("path")
-    .attr("class", "layer")
-    .attr("d", function(d) {
-      return areaK(d.values); })
-    .style("fill", function(d, i) { return z(i); });
 
 
-      svg.selectAll("streamgraph")
-        .append("g")
-          .attr("class", "x axis")
-          // .attr("transform", "translate(0," + height + ")")
-          .call(xAxis);
+var layer = d3v2.select(".streamgraph").selectAll(".layer")
+                .data(layers)
+                .enter().append("path")
+                .attr("class", "layer")
+                .attr("transform", "translate(" + 50 + "," + 250 + ")")
+                .attr("d", function(d) {
+                  return areaK(d.values); })
+                .style("fill", function(d, i) { return z(i); })
 
-      //     // console.log(xAxis)
-      //
-      // svg.append("g")
-      //     .attr("class", "y axis")
-      //     .attr("transform", "translate(" + width + ", 0)")
-      //     .call(yAxis.orient("right"));
-      //
-      // svg.append("g")
-      //     .attr("class", "y axis")
-      //     .call(yAxis.orient("left"));
 
-      svg.selectAll(".layer")
+// console.log(xAxis);
+
+  var axis = d3.select(".streamgraph")
+
+    axis.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(50," + (height+300 )+ ")")
+    .call(xAxis);
+
+      axis.selectAll(".layer")
         .attr("opacity", 1)
         .on("mouseover", function(d, i) {
-          svg.selectAll(".layer").transition()
+          // console.log(i);
+          axis.selectAll(".layer").transition()
           .duration(250)
           .attr("opacity", function(d, j) {
+            // console.log(j);
+            // console.log(i);
             return j != i ? 0.6 : 1;
         })})
 
-      //   .on("mousemove", function(d, i) {
-      //     mousex = d3v2.mouse(this);
-      //     mousex = mousex[0];
-      //     var invertedx = x.invert(mousex);
-      //     invertedx = invertedx.getMonth() + invertedx.getDate();
-      //     var selected = (d.values);
-      //     for (var k = 0; k < selected.length; k++) {
-      //       datearray[k] = selected[k].date
-      //       datearray[k] = datearray[k].getMonth() + datearray[k].getDate();
-      //     }
-      //
-      //     mousedate = datearray.indexOf(invertedx);
-      //     console.log(mousedate);
-      //     pro = d.values[mousedate].value;
-      //     // console.log(pro)
-      //
-      //     d3.select(this)
-      //     .classed("hover", true)
-      //     .attr("stroke", strokecolor)
-      //     .attr("transform", "translate(" + 50 + "," + 1000 + ")")
-      //     .attr("stroke-width", "0.5px"),
-      //     tooltip.html( "<p>" + d.key + "<br>" + pro + "</p>" ).style("visibility", "visible")
-      //
-      //
-      //   })
-      //   .on("mouseout", function(d, i) {
-      //    svg.selectAll(".layer")
-      //     .transition()
-      //     .duration(250)
-      //     .attr("opacity", "1");
-      //     d3.select(this)
-      //     .classed("hover", false)
-      //     .attr("stroke-width", "0px"), tooltip.html( "<p>" + d.key + "<br>" + pro + "</p>" ).style("visibility", "hidden");
-      // })
-      //
-      // var vertical = d3v2.select(".chart")
-      //       .append("div")
-      //       .attr("class", "remove")
-      //       .style("position", "absolute")
-      //       .style("z-index", "19")
-      //       .style("width", "1px")
-      //       .style("height", "380px")
-      //       .style("top", "10px")
-      //       .style("bottom", "30px")
-      //       .style("left", "0px")
-      //       .style("background", "#fff");
-      //
-      // d3v2.select(".chart")
-      //     .on("mousemove", function(){
-      //        mousex = d3v2.mouse(this);
-      //        mousex = mousex[0] + 5;
-      //        vertical.style("left", mousex + "px" )})
-      //     .on("mouseover", function(){
-      //        mousex = d3v2.mouse(this);
-      //        mousex = mousex[0] + 5;
-      //        vertical.style("left", mousex + "px")});
+        .on("mousemove", function(d, i) {
+          mousex = d3.mouse(this);
+          mousex = mousex[0];
+          var invertedx = x.invert(mousex);
+          var date = formatDate(invertedx);
+          console.log(date);
+          invertedx = invertedx.getMonth() + invertedx.getDate();
+          var selected = (d.values);
+          for (var k = 0; k < selected.length; k++) {
+            datearray[k] = selected[k].date
+            datearray[k] = datearray[k].getMonth() + datearray[k].getDate();
+          }
+
+          mousedate = datearray.indexOf(invertedx);
+
+          pro = d.values[mousedate].value;
+
+          d3.select(this)
+          .attr("stroke-width", "0.5px"),
+          tooltip.style("left", (d3.event.pageX) + -30 + "px")
+          .style("top", (d3.event.pageY) + 15 + "px")
+
+          .html( "<p>" + d.key + "<br>" + pro + "<br>" + date+"</p>").style("visibility", "visible")
+
+        })
+        .on("mouseout", function(d, i) {
+          console.log(d);
+         axis.selectAll(".layer")
+          .transition()
+          .duration(250)
+          .attr("opacity", "1")
+          console.log(i);
+          d3.select(this)
+          .attr("stroke-width", "0px"), tooltip.html( "<p>" + d.key + "<br>" + pro + "</p>" ).style("visibility", "hidden")
+      })
+
+      var vertical = d3.select(".chart")
+            .append("div")
+            .attr("class", "remove")
+            .style("position", "absolute")
+            .style("z-index", "19")
+            .style("width", "1px")
+            .style("height", "200px")
+            .style("top", "900px")
+            .style("bottom", "30px")
+            .style("left", "0px")
+            .style("background", "#fff")
+
+
+      d3.select(".chart")
+          .on("mousemove", function(){
+             mousex = d3.mouse(this);
+             mousex = mousex[0]-2 ;
+             vertical.style("visibility", "visible")
+             .style("left", mousex + "px" )})
+
+          .on("mouseover", function(){
+
+             mousex = d3.mouse(this);
+             mousex = mousex[0] -2;
+             vertical.style("visibility", "visible")
+             .style("left", mousex + "px")})
+
+          .on("mouseout",function(){
+            vertical.style("visibility", "hidden")
+          })
+
+
+}
+
+
+function updateStream(currency,crypto){
+
+  d3.selectAll('.streamgraph').remove()
+  streamChart(crypto[currency])
+
 }
