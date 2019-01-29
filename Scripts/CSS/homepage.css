@@ -1,0 +1,21 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+.image {
+	background-image: url("../../doc/top100.png");
+	height: 600px;
+	background-position: top;
+	position: relative;
+}
+
+.textIndex{
+  text-align: center;
+  color: #252525;
+  font-size: 60px;
+  background: #f0f0f0;
+}
+.navbar{
+  margin-bottom: -20px;
+}

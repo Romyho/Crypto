@@ -1,0 +1,150 @@
+<!-- visualizations.html
+
+ Romy Ho
+11007303
+
+Programmeerproject
+
+A html for the homepage
+-->
+<!DOCTYPE html>
+<meta charset="utf-8"/>
+
+<html lang="en-US">
+	<head>
+	  <title>Top 100 cryptocurrency</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+		<link rel="stylesheet" href="../css/visualizations.css">
+		<link rel="stylesheet" href="../css/bubble.css">
+		<link rel="stylesheet" href="../css/stream.css">
+		<link rel="stylesheet" href="../css/scatter.css">
+
+	</head>
+	<body>
+			<nav class="navbar navbar-default">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="index.html">Top 100 cryptocurrency</a>
+					</div>
+					<ul class="nav navbar-nav">
+						<li><a href="index.html"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+							<li class="active"><a href="visualizations.html"><span class="glyphicon glyphicon-stats"></span> Visualizations</a></li>
+						<li><a href="additional-info.html"><span class="glyphicon glyphicon-info-sign"></span> Additional Information</a></li>
+						<script src="https://unpkg.com/d3-simple-slider/build/d3-simple-slider.js"></script>
+					</ul>
+				</div>
+
+			</nav>
+
+
+
+
+
+
+<div class="container-fluid" id="visu">
+	<div class="row" id="mainTitle">
+		<h1>Visualizations</h1>
+	</div>
+	<div class="row" id= row1>
+		<div class="col-lg-6" id="column">
+			<div class="row" id ='title'>
+				<h3>Markt value currencies 2013-2018</h3>
+			</div>
+			<div class="row">
+				<div id="bubble-info"></div>
+				</div>
+				<div class="row">
+				<div id=bubble-column></div>
+
+			</div>
+			<div class="row">
+				<button id="play-button">Play</button>
+			</div>
+			<div class="row">
+			<div id="bubble-slider"></div>
+			</div>
+
+
+			</div>
+			<div class="col-lg-6" id="columns-right">
+			<div class="row" id="title">
+					<h3>Ranking and begin date currencies 2013-2018</h3>
+			</div>
+			<div class="row" id="tipScatter">
+
+			</div>
+			<div class="row">
+				<div id="scatter"></div>
+			</div>
+
+				</div>
+	</div>
+	<!-- </div> -->
+	<div class="row" id="title-row2">
+	<div class="dropdown"></div>
+</div>
+
+
+
+
+	<div class="row" id = row2>
+
+
+		<div class="col-lg-6" id="column2">
+
+			<div class="row" id="title">
+					<h3>Open, Close, High and Low daily price</h3>
+			</div>
+			<div class="row" id="tip">
+
+			</div>
+			<div class="row">
+				<div class="chart"></div>
+			</div>
+
+				</div>
+			<div class="col-lg-6" id="column3">
+				<div class="news">
+					<h3>News articles:</h3>
+					</div>
+			</div>
+
+
+
+
+	</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="https://unpkg.com/d3-simple-slider/build/d3-simple-slider.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script src="http://d3js.org/d3.v2.js"></script>
+<script>
+	var d3v2 = jQuery.extend(true, {}, d3)
+</script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="../javascript/streamgraph.js"></script>
+<script src="../javascript/bubblechart.js"></script>
+<script src="../javascript/mainCharts.js"></script>
+<script src="../javascript/scatterplot.js"></script>
+<script src="../javascript/timeSlider.js"></script>
+<script src="../javascript/news.js"></script>
+<script src="../javascript/dropdown.js">
+
+</script>
+	</body>
+	<br>
+	<br>
+	<br>
+	<footer class="text-center">
+		<strong>Romy Ho</strong><br>
+		<strong>University of Amsterdam</strong><br>
+		<span>Student number: 11007303</span><br>
+		<span>Minor Programming</span><br>
+		<span>Programming Project</span>
+	</footer>
+
+</html>

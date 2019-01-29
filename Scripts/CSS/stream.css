@@ -1,0 +1,14 @@
+.chart{
+  height: 450px;
+}
+
+
+.tipStream{
+  z-index: 20;
+  visibility: hidden;
+  width:auto;
+  height:50px;
+  width: 60px;
+  bottom: 200px;
+  margin-left: 200px;
+}
