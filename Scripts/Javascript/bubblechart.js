@@ -145,6 +145,8 @@ function bubble(data,crypto,date){
       })
       .on('click', function(d){
         updateAll(d.data[4], d.data[6], crypto)
+        console.log(d.data[4]);
+        console.log(d.data[6]);
   } );
 
 

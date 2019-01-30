@@ -81,11 +81,11 @@ function changeDropdown(name){
     d3.selectAll('.dropdown')
     .select("option[value = '0x']")
     .attr("selected", true)
-
   }
-  else{d3.selectAll('.dropdown')
-  .select("option[value = "+name+"]")
-  .attr("selected", true)
+  else{
+    d3.selectAll('.dropdown')
+      .select("option[value = "+name+"]")
+      .attr("selected", true)
 }}
 
 

@@ -9,9 +9,10 @@
 * A javascript file, that makes a scatterplot with d3.
 */
 
-
+// make scatterplot
 function scatterPlot(crypto){
 
+// make tooltip
 var tooltip = d3.selectAll("#tipScatter")
                 .append("div")
                 .attr("class", "tipScat")
@@ -20,7 +21,7 @@ var tooltip = d3.selectAll("#tipScatter")
 tooltip.html("<FONT SIZE='5'> Point information <br></FONT>"+ "<br>"+"<strong>Currency: </strong><span class='details'>"  + "<br></span>" + "<strong>Ranking: </strong><span class='details'>" +  "<br></span>" + "<strong>Begin datum: </strong><span class='details'>" + "<br></span>" )
    .style("visibility", "visible")
 
-
+// make data lists
 var name = []
 var date = []
 var ranking = []
@@ -128,7 +129,6 @@ for (i in crypto){
         // make streamgraph for currency
         .on('click', function(d){
           updateAll(d[2], d[3], crypto)
-
 
         })
 

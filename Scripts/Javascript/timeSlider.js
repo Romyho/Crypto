@@ -1,4 +1,4 @@
-/*
+/* timeSlider.js
 *
 * Romy Ho
 *
@@ -6,15 +6,17 @@
 *
 *
 *
-* A javascript file,
+* A javascript file, makes timeslider with playbutton.
 */
 
+// make slider
 function timeSlider(startDate, endDate, crypto){
 
-
+// format date
   var formatDateIntoYear = d3.timeFormat("%Y");
   var formatDate = d3.timeFormat("%d %b %Y");
 
+// make svg
 var margin = {top:50, right:50, bottom:0, left:50},
     width = 650 - margin.left - margin.right,
     height = 100 - margin.top - margin.bottom;
@@ -24,8 +26,7 @@ var svg = d3.select("#bubble-slider")
     .attr("width", width + margin.left*2 + margin.right)
     .attr("height", height + margin.top + margin.bottom);
 
-////////// slider //////////
-
+// make slider
 var moving = false;
 var currentValue = 0;
 var targetValue = width;
@@ -69,17 +70,19 @@ slider.insert("g", ".track-overlay")
     .attr("text-anchor", "middle")
     .text(function(d) { return formatDateIntoYear(d); });
 
+// make handle
 var handle = slider.insert("circle", ".track-overlay")
     .attr("class", "handle")
     .attr("r", 9);
 
+// make labels
 var label = slider.append("text")
     .attr("class", "label")
     .attr("text-anchor", "middle")
     .text(formatDate(startDate))
     .attr("transform", "translate(0," + (-25) + ")")
 
-
+// make playbutton
   playButton
     .on("click", function() {
     var button = d3.select(this);
@@ -94,8 +97,7 @@ var label = slider.append("text")
     }
   })
 
-
-
+// change slider when played
 function step() {
   updateBubble(x.invert(currentValue),crypto);
   currentValue = currentValue + (targetValue/151);
@@ -107,7 +109,7 @@ function step() {
   }
 }
 
-
+// change bubble chart when played
 function updateBubble(h) {
   d3.selectAll('.bubbles').remove()
 

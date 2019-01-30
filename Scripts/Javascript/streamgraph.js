@@ -7,20 +7,23 @@
 *
 *
 *
-* A javascript file, that makes a streamgraph and updates streamgraph
+* A javascript file, that makes a streamgraph and updates streamgraph.
 */
 
 
 var datearray = [];
 
+// make stream chart
 function streamChart(data) {
 
-    var formatDate = d3.timeFormat("%d %b %Y")
+// format date
+var formatDate = d3.timeFormat("%d %b %Y")
 
-    var tooltip = d3.select(".tipStream")
+// make tooltip
+var tooltip = d3.select(".tipStream")
 
-  colorrange = ["#B30000", "#E34A33", "#FC8D59", "#FDBB84", "#FDD49E", "#FEF0D9"];
-  strokecolor = colorrange[0];
+colorrange = ["#B30000", "#E34A33", "#FC8D59", "#FDBB84", "#FDD49E", "#FEF0D9"];
+strokecolor = colorrange[0];
 
 
 var margin = {top: 20, right: 40, bottom: 30, left: 30};
@@ -34,6 +37,7 @@ datum = data.dates
 var z = d3v2.scale.ordinal()
             .range(colorrange);
 
+// make dictionary
   dataset = [{"key": "low", "values": []},{"key": "close", "values": []},{"key": "open", "values": []},{"key": "high", "values": []}]
 
   var low = []
@@ -66,6 +70,7 @@ var z = d3v2.scale.ordinal()
     })
   }
 
+// scale x and make x axis
   var x = d3.scaleTime()
       .range([100, width])
       .domain(d3.extent(dataset[0].values, function(d) {return d.date; }));
@@ -79,12 +84,13 @@ var z = d3v2.scale.ordinal()
   var xAxis = d3.axisBottom()
                 .scale(x)
 
+// make svg
   var svg = d3v2.select(".chart").append("svg")
       .attr('class', 'streamgraph')
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
 
-
+      // stacks data
       var stack = d3v2.layout.stack()
         .offset("silhouette")
         .values(function(d) { return d.values; })
@@ -93,6 +99,7 @@ var z = d3v2.scale.ordinal()
 
         var layers = stack((dataset));
 
+        // makes area for layers
     var areaK = d3v2.svg.area()
         .interpolate("cardinal")
         .x(function(d) { return x(d.date); })
@@ -108,7 +115,7 @@ var z = d3v2.scale.ordinal()
             }
           }
         }
-
+      // y scale and y axis
     var y = d3.scaleLinear()
         .range([height-100, 0])
         .domain([0, total_max])
@@ -118,7 +125,7 @@ var z = d3v2.scale.ordinal()
                       .scale(y)
 
 
-
+// make streamgraph
 var layer = d3v2.select(".streamgraph").selectAll(".layer")
                 .data(layers)
                 .enter().append("path")
@@ -188,7 +195,7 @@ var layer = d3v2.select(".streamgraph").selectAll(".layer")
 
 }
 
-
+// update streamgraph
 function updateStream(currency,crypto){
   d3.selectAll('.streamgraph').remove()
   streamChart(crypto[currency])

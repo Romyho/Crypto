@@ -1,4 +1,4 @@
-/* bubbleChart.js
+/* mainChart.js
 *
 * Romy Ho
 *
@@ -6,7 +6,7 @@
 *
 * Programmeerproject
 *
-* A javascript file, making a bubble chart
+* A javascript file, loading the data and calls graph functions.
 *
 */
 
@@ -75,7 +75,7 @@ var cryptoDates = {}
       .append("div")
       .attr("class", "tipStream")
 
-
+// make graphs, sliders, titles, dropdown etc.
 bubbleData( crypto, date[0])
 var begin = new Date (date[0]),
     end = new Date (date[(date.length-1)]);

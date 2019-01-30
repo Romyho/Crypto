@@ -1,71 +1,65 @@
-# Programmeer project - Cryptocurrency
+# Programmeer project - Top 100 cryptocurrency
 
+Name: Romy Ho
+Student number: 11007303
+Minor Programming
 
-## Introductie
-Crypto currency is getting bigger, but there is not much information about it. It's not tangible and only mutually tradable, without a middleman. Which currencies exist and is the market changeable or constant (rising?).
+## Introduction
+Crypto currency is getting bigger, but there is not much information about it. It's not tangible and only mutually tradable, without a middleman. Which currencies exist and is the market changeable or constant. This website will contain visualizations to make cryptocurrency more accessible.
 
-## Problem
-There is a lot of data available about crypto currency. Because there is no middleman or trader who makes the market more clear, the market is less accessible and interesting for new investors and traders.
-
-## Oplossing
-The visualization of the developments of crypto currency and specific information per currency, between 2013-2018.
 
 ## Website
-+ The whole market in bubbles of currencies, the biggest bubble is the bubble with the largest market value.(bubblechart)
-  With a time slider the user can choose the time of the bubblechart.
-+ Each currency has a little information sheet(1), when mouse is over the bubble.
-+ An extensive information sheet(2), when clicked on bubble.
-  Within infomation sheet(2), the user can select currencies, or change them.
 
+### homepage
+Homepage with cryptocurrency logo's
+![home](doc/homepage.png)
 
+This footer is at the end of the page, the same footer at visualizations.html
+![footer](doc/footer.png)
 
-Infosheet(1):
-+ Begin date og currency
-+ Current price usd
-+ Ranking
-+ Market coverage
+### visualization
+The nav-bar, bubble and scatterplot.
+![visu](doc/visualization1.png)
+The play/pauze slider and dropdown menu.
+![visu](doc/playbutton-dropdown.png)
+The Streamgraph and news items.
+![visu](doc/visualization2.png)
 
+### additional information
+![visu](doc/additional-info.png)
 
-Infosheet(2):
-+ price usd (Stream graph)
-+ Recent news items
-+ Total market (Pie chart)
+## Sources
+#### Data
+Downloaded on 08-01-2019
+[Every Cryptocurrency Daily Market Price](https://www.kaggle.com/jessevent/all-crypto-currencies/kernels)
 
-### Visual Sketch
-![sketch](doc/website_design.png)
+## Code Sources
 
-## Main Features
-+ Interactive bubble Bubbelchart(MVP)
-The whole market in bubbles of currencies, the biggest bubble is the bubble with the largest market value.
-+ Interactive Stream graph(MVP)
-Shows price in usd over time.
-+ Interactive line chart(MVP)
-Shows market coverage over time.
-+ Pie chart(Optional)
-Total market
-+ Checkbox(MVP)
-Choose currencies to compare.
-+ Time Slider(MVP)
-Choose time
-+ News
-Show news items
-+ Candle graph(Optional)
-Show open, close, high en low rate per day.
++ Bootstrap elements:
+ + navigation bar: [nav-bar w3schools](https://www.w3schools.com/bootstrap/bootstrap_navbar.asp)
+ + rows & columns:  [grid](https://getbootstrap.com/docs/4.2/examples/grid/)
 
-## Prerequisites
-### Data
-[Every Cryptocurrency Daily Market Price](https://www.kaggle.com/jessevent/all-crypto-currencies/kernels). This is the only used data, i will only use the top 100 ranked crypto currencies.
++ Bubble chart:
+  + The idea for a bubble chart:  [bubble](https://bl.ocks.org/alokkshukla/3d6be4be0ef9f6977ec6718b2916d168)
+  + The idea for a play/pause time slider: [slider](https://bl.ocks.org/officeofjane/47d2b0bfeecfcb41d2212d06d095c763)
+  [script](https://unpkg.com/d3-simple-slider/build/d3-simple-slider.js)
 
-### External components
-- [D3](https://d3js.org/)
-- [D3-tip](https://github.com/Caged/d3-tip)
-- [Atom](atom.io)
++ Scatter plot:
+  + Used by Data processing: [scatter](http://bl.ocks.org/weiglemc/6185069)
 
-### Simular visualisation
-Crypto visualisatie [Elementus](https://elementus.io/token-sales-history). Elementus, uses D3 en ajax, slider.  In the moving visualization the total market expansion is clearly visible, but no further details about the currencies.
++ Stream graph:
+  + The idea for a streamgraph:  [stream](http://bl.ocks.org/WillTurman/4631136)
 
++ News articles:
+  + API: [Crypto control](https://cryptocontrol.io/en/developers/apis)
 
-### Hardest Parts
-+ De informatie zo duidelijk mogelijk weergeven
-+ Website design
-+ Nieuws items interactief/up to date, api acces
++ Dropdown:
+  + The idea for a dropdown: [dropdown](http://bl.ocks.org/williaster/10ef968ccfdc71c30ef8)
+
+##### API's and D3 Plugins
+
++ [D3 V5](https://d3js.org/d3.v5.min.js)
++ [D3 V2](http://d3js.org/d3.v2.js)
++ [jQuery](https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js)
++ [Bootstrap](https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js)
++ [Cryptocontrol](https://cryptocontrol.io/en/developers/apis)
