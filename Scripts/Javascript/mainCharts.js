@@ -81,10 +81,11 @@ var begin = new Date (date[0]),
     end = new Date (date[(date.length-1)]);
     news(crypto[name[0]].info.name)
 timeSlider(begin, end, crypto)
-streamChart(crypto[name[0]])
+
 scatterPlot(crypto)
 title(name[0])
 makedropdown(crypto,name)
+streamChart(crypto[name[0]])
 
   });
 
