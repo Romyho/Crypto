@@ -18,7 +18,10 @@ var tooltip = d3.selectAll("#tipScatter")
                 .attr("class", "tipScat")
 
 
-tooltip.html("<FONT SIZE='5'> Point information <br></FONT>"+ "<br>"+"<strong>Currency: </strong><span class='details'>"  + "<br></span>" + "<strong>Ranking: </strong><span class='details'>" +  "<br></span>" + "<strong>Begin datum: </strong><span class='details'>" + "<br></span>" )
+tooltip.html("<FONT SIZE='5'> Point information <br></FONT>"+ "<br>"
++"<strong>Currency: </strong><span class='details'>"  + "<br></span>"
++ "<strong>Ranking: </strong><span class='details'>" +  "<br></span>"
++ "<strong>Begin datum: </strong><span class='details'>" + "<br></span>" )
    .style("visibility", "visible")
 
 // make data lists
@@ -39,7 +42,7 @@ for (i in crypto){
    // colors for data points showing the data
    const colors = d3.scaleOrdinal()
                        .domain(name)
-                       .range(['#9e0142','#d53e4f','#f46d43','#fdae61','#fee08b','#e6f598','#abdda4','#66c2a5','#3288bd','#5e4fa']);
+                       .range(['#9e0142','#d53e4f','#f46d43','#fdae61', '#fee08b', '#e6f598','#abdda4','#66c2a5','#3288bd','#5e4fa']);
 
 
    // make coordinates of the data
@@ -109,7 +112,12 @@ for (i in crypto){
         .on('mouseover',function(d){
           tooltip.style("left", (d3.event.pageX) + -30 + "px")
                  .style("top", (d3.event.pageY) + 15 + "px")
-                 .html(" <FONT SIZE='5'>Point information <br></FONT>" + "<br>"+"<strong>Currency: </strong><span class='details'>" +  d[2] + "<br></span>" + "<strong>Ranking: </strong><span class='details'>" + d[1] + "<br></span>" + "<strong>Begin datum: </strong><span class='details'>" + d[0] + "<br></span>" )
+                 .html(" <FONT SIZE='5'>Point information <br></FONT>" + "<br>"
+                 +"<strong>Currency: </strong><span class='details'>" +  d[2]
+                 + "<br></span>" + "<strong>Ranking: </strong><span class='details'>"
+                  + d[1] + "<br></span>" +
+                   "<strong>Begin datum: </strong><span class='details'>" +
+                    d[0] + "<br></span>" )
                  .style("visibility", "visible")
 
           d3.select(this)
@@ -118,7 +126,11 @@ for (i in crypto){
         })
         // hide info when mouse out
         .on('mouseout', function(d){
-          tooltip.html("<FONT SIZE='5'> Point information <br></FONT>"+ "<br>"+"<strong>Currency: </strong><span class='details'>"  + "<br></span>" + "<strong>Ranking: </strong><span class='details'>" +  "<br></span>" + "<strong>Begin datum: </strong><span class='details'>" + "<br></span>" )
+          tooltip.html("<FONT SIZE='5'> Point information <br></FONT>"+ "<br>"
+          +"<strong>Currency: </strong><span class='details'>"  + "<br></span>"
+           + "<strong>Ranking: </strong><span class='details'>" +  "<br></span>"
+            + "<strong>Begin datum: </strong><span class='details'>" +
+            "<br></span>" )
              .style("visibility", "visible")
           d3.select(this)
             .style("stroke","white")

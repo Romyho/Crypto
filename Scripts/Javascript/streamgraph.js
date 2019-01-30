@@ -38,7 +38,8 @@ var z = d3v2.scale.ordinal()
             .range(colorrange);
 
 // make dictionary
-  dataset = [{"key": "low", "values": []},{"key": "close", "values": []},{"key": "open", "values": []},{"key": "high", "values": []}]
+  dataset = [{"key": "low", "values": []},{"key": "close", "values": []}, \
+  {"key": "open", "values": []},{"key": "high", "values": []}]
 
   var low = []
   var high = []
@@ -56,16 +57,20 @@ var z = d3v2.scale.ordinal()
 
     dataset.forEach(function(data){
       if (data.key == "high"){
-        data.values.push({"key": "high", "value": datum[d]["high"], "date": new Date(d)})
+        data.values.push({"key": "high", "value": datum[d]["high"], \
+         "date": new Date(d)})
       }
       else if (data.key == 'open') {
-        data.values.push({"key": "open", "value": datum[d]["open"], "date": new Date(d)})
+        data.values.push({"key": "open", "value": datum[d]["open"], \
+        "date": new Date(d)})
       }
       else if(data.key == 'low'){
-        data.values.push({"key": "low", "value": datum[d]["low"], "date": new Date(d)})
+        data.values.push({"key": "low", "value": datum[d]["low"], \
+        "date": new Date(d)})
       }
       else{
-        data.values.push({"key": "close", "value": datum[d]["close"], "date": new Date(d)})
+        data.values.push({"key": "close", "value": datum[d]["close"], \
+        "date": new Date(d)})
       }
     })
   }
@@ -179,7 +184,8 @@ var layer = d3v2.select(".streamgraph").selectAll(".layer")
           d3.select(this)
           .attr("stroke-width", "0.5px"),
           tooltip
-          .html( "<p>" + d.key + "<br>" + pro + "<br>" + date+"</p>").style("visibility", "visible")
+          .html( "<p>" + d.key + "<br>" + pro + "<br>" + date+"</p>")
+          .style("visibility", "visible")
 
         })
         .on("mouseout", function(d, i) {

@@ -21,7 +21,7 @@ function bubbleData(crypto, datum){
        for (j in crypto[i].dates){
          date.push(j)
          if(j == datum){
-             market.push([crypto[i].info.symbol,crypto[i].dates[j].market,crypto[i].dates[j].close,crypto[i].info.ranking, i, crypto[i].info.begin, crypto[i].info.name])
+             market.push([crypto[i].info.symbol,crypto[i].dates[j].market, crypto[i].dates[j].close,crypto[i].info.ranking, i,  crypto[i].info.begin, crypto[i].info.name])
            }
          }
        }
@@ -37,13 +37,16 @@ function bubble(data,crypto,date){
   // make tooltip
   var tooltip = d3.select(".tipBubble")
 
-  tooltip.html("<FONT SIZE='5'> Bubble information <br></FONT>"+ "<br>" +" <strong>Currency: <br></strong>" + "<strong>Market value: <br></strong> " + "<strong>Current price: <br></strong>" + "<strong>Begin date: <br></strong>"+ "<strong>Ranking: <br></strong>")
+  tooltip.html("<FONT SIZE='5'> Bubble information <br></FONT>"+ "<br>" +
+  " <strong>Currency: <br></strong>" + "<strong>Market value: <br></strong> "+
+  "<strong>Current price: <br></strong>" + "<strong>Begin date: <br></strong>"
+   + "<strong>Ranking: <br></strong>")
 
 
   // give colors to domain
   var color = d3.scaleOrdinal()
                       .domain(data)
-                      .range(['#9e0142','#d53e4f','#f46d43','#fdae61','#fee08b','#e6f598','#abdda4','#66c2a5','#3288bd','#5e4fa']);
+                      .range(['#9e0142','#d53e4f','#f46d43','#fdae61','#fee08b', '#e6f598','#abdda4','#66c2a5','#3288bd','#5e4fa']);
 
   // makes bubble
   var bubble = d3.pack(data)
@@ -88,13 +91,28 @@ function bubble(data,crypto,date){
           })
           .on('mouseover',function(d){
               tooltip.style("visibility", "visible")
-                     .html("<FONT SIZE='5'> Bubble information <br></FONT>"+ "<br>" +"<strong>Currency: </strong><span class='details'>" + d.data[4] + "<br></span>" + "<strong>Market value: </strong><span class='details'>" +  '$'+ (d.data[1]).toLocaleString()  + "<br></span>" + "<strong>Current price: </strong><span class='details'>" + '$'+ d.data[2] + "<br></span>" + "<strong>Begin date: </strong><span class='details'>" + d.data[5]+"<br></span>"+ "<strong>Ranking: </strong><span class='details'>" + d.data[3]+"<br></span>")
+                     .html("<FONT SIZE='5'> Bubble information <br></FONT>"+
+                     "<br>" +"<strong>Currency: </strong><span class='details'>"
+                      + d.data[4] + "<br></span>" +
+                      "<strong>Market value: </strong><span class='details'>"
+                      +  '$'+ (d.data[1]).toLocaleString()  + "<br></span>"
+                      + "<strong>Current price: </strong><span class='details'>"
+                      + '$'+ d.data[2] + "<br></span>"
+                      + "<strong>Begin date: </strong><span class='details'>"
+                      + d.data[5]+"<br></span>"
+                      + "<strong>Ranking: </strong><span class='details'>"
+                      + d.data[3]+"<br></span>")
             d3.select(this)
               .style("stroke","white")
               .style("stroke-width",3)
           })
           .on('mouseout', function(d){
-           tooltip.html("<FONT SIZE='5'> Bubble information <br></FONT>"+ "<br>" +"<strong>Currency: <br></strong>" + "<strong>Market value: <br></strong> " + "<strong>Current price: <br></strong>" + "<strong>Begin date: <br></strong>"+ "<strong>Ranking: <br></strong>")
+           tooltip.html("<FONT SIZE='5'> Bubble information <br></FONT>"
+           + "<br>" +"<strong>Currency: <br></strong>"
+           + "<strong>Market value: <br></strong> "
+           + "<strong>Current price: <br></strong>"
+           + "<strong>Begin date: <br></strong>"
+           + "<strong>Ranking: <br></strong>")
             d3.select(this)
               .style("stroke","white")
               .style("stroke-width",0.3);
@@ -115,10 +133,25 @@ function bubble(data,crypto,date){
       .attr("fill", "white")
       .on('mouseover',function(d){
           tooltip.style("visibility", "visible")
-                 .html("<FONT SIZE='5'> Bubble information <br></FONT>"+ "<br>" +"<strong>Currency: </strong><span class='details'>" +    d.data[4] + "<br></span>" + "<strong>Market value: </strong><span class='details'>" + '$'+ (d.data[1]).toLocaleString() + "<br></span>" + "<strong>Current price: </strong><span class='details'>" + '$'+ d.data[2] + "<br></span>" + "<strong>Begin date: </strong><span class='details'>" + d.data[5]+"<br></span>"+ "<strong>Ranking: </strong><span class='details'>" + d.data[3]+"<br></span>")
+                 .html("<FONT SIZE='5'> Bubble information <br></FONT>"
+                 + "<br>" +"<strong>Currency: </strong><span class='details'>"
+                 +    d.data[4] + "<br></span>"
+                 + "<strong>Market value: </strong><span class='details'>"
+                 + '$'+ (d.data[1]).toLocaleString() + "<br></span>"
+                 + "<strong>Current price: </strong><span class='details'>"
+                 + '$'+ d.data[2] + "<br></span>"
+                 + "<strong>Begin date: </strong><span class='details'>"
+                 + d.data[5]+"<br></span>"
+                 + "<strong>Ranking: </strong><span class='details'>"
+                 + d.data[3]+"<br></span>")
       })
       .on('mouseout', function(d){
-       tooltip.html("<FONT SIZE='5'> Bubble information <br></FONT>"+ "<br>" +"<strong>Currency: <br></strong>" + "<strong>Market value: <br></strong> " + "<strong>Current price: <br></strong>" + "<strong>Begin date: <br></strong>"+ "<strong>Ranking: <br></strong>")
+       tooltip.html("<FONT SIZE='5'> Bubble information <br></FONT>"
+       + "<br>" +"<strong>Currency: <br></strong>"
+        + "<strong>Market value: <br></strong> "
+         + "<strong>Current price: <br></strong>"
+         + "<strong>Begin date: <br></strong>"
+         + "<strong>Ranking: <br></strong>")
       })
       .on('click', function(d){
         updateAll(d.data[4], d.data[6], crypto)
@@ -138,15 +171,28 @@ function bubble(data,crypto,date){
       .attr("fill", "white")
       .on('mouseover',function(d){
           tooltip.style("visibility", "visible")
-                 .html("<FONT SIZE='5'> Bubble information <br></FONT>"+ "<br>" +"<strong>Currency: </strong><span class='details'>" +    d.data[4] + "<br></span>" + "<strong>Market value: </strong><span class='details'>" + '$'+ (d.data[1]).toLocaleString()+ "<br></span>" + "<strong>Current price: </strong><span class='details'>" + '$' + d.data[2] + "<br></span>" + "<strong>Begin date: </strong><span class='details'>" + d.data[5]+"<br></span>"+ "<strong>Ranking: </strong><span class='details'>" + d.data[3]+"<br></span>")
+                 .html("<FONT SIZE='5'> Bubble information <br></FONT>"
+                 + "<br>" +"<strong>Currency: </strong><span class='details'>"
+                  +    d.data[4] + "<br></span>"
+                  + "<strong>Market value: </strong><span class='details'>"
+                  + '$'+ (d.data[1]).toLocaleString()+ "<br></span>"
+                  + "<strong>Current price: </strong><span class='details'>"
+                   + '$' + d.data[2] + "<br></span>"
+                    + "<strong>Begin date: </strong><span class='details'>"
+                     + d.data[5]+"<br></span>"
+                     + "<strong>Ranking: </strong><span class='details'>"
+                     + d.data[3]+"<br></span>")
       })
       .on('mouseout', function(d){
-       tooltip.html("<FONT SIZE='5'> Bubble information </FONT>"+"<br>" +"<strong>Currency: <br></strong>" + "<strong>Market value: <br></strong> " + "<strong>Current price: <br></strong>" + "<strong>Begin date: <br></strong>"+ "<strong>Ranking: <br></strong>")
+       tooltip.html("<FONT SIZE='5'> Bubble information </FONT>"+"<br>"
+       +"<strong>Currency: <br></strong>"
+       + "<strong>Market value: <br></strong> "
+       + "<strong>Current price: <br></strong>"
+       + "<strong>Begin date: <br></strong>"
+       + "<strong>Ranking: <br></strong>")
       })
       .on('click', function(d){
         updateAll(d.data[4], d.data[6], crypto)
-        console.log(d.data[4]);
-        console.log(d.data[6]);
   } );
 
 

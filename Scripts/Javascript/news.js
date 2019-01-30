@@ -12,7 +12,8 @@
 function news(currency){
 
 // load api
-var url = 'https://cryptocontrol.io/api/v1/public/news/coin/'+currency+'?key=6742ef75f0eae66af822a3608cdf79d5'
+var url = 'https://cryptocontrol.io/api/v1/public/news/coin/'+currency
++'?key=6742ef75f0eae66af822a3608cdf79d5'
 
 var api = '6742ef75f0eae66af822a3608cdf79d5'
 
@@ -45,7 +46,8 @@ fetch(req)
 for(i in articles){
   svg.append("g")
     .attr("class", "news-links")
-    .html("-"+" "+"<a href=" + articles[i].url +'>' + articles[i].title +  "<br></a> "+"<br>")
+    .html("-"+" "+"<a href=" + articles[i].url +'>' + articles[i].title
+    +  "<br></a> "+"<br>")
       };
 
       if (data.length == 0){
