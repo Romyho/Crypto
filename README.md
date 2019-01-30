@@ -8,8 +8,9 @@ Minor Programming
 Crypto currency is getting bigger, but there is not much information about it. It's not tangible and only mutually tradable, without a middleman. Which currencies exist and is the market changeable or constant. This website will contain visualizations to make cryptocurrency more accessible.
 
 
-## Website
 
+## Website
+[My gitpage](https://romyho.github.io/Crypto/Scripts/HTML/index.html)
 ### homepage
 Homepage with cryptocurrency logo's
 ![home](doc/homepage.png)
