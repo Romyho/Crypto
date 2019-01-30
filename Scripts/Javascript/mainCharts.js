@@ -13,8 +13,8 @@
 window.onload = function() {
 
   //select data files
-  var cryptoTotal = "../../data/crypto-markets.json";
-  var nameDate= "../../data/name_date.json";
+  var cryptoTotal = "../../Data/crypto-markets.json";
+  var nameDate= "../../Data/name_date.json";
 
   var requests = [d3.json(cryptoTotal), d3.json(nameDate)];
 
