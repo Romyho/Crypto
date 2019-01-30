@@ -1,7 +1,7 @@
 # Programmeer project - Top 100 cryptocurrency
 
-Name: Romy Ho
-Student number: 11007303
+Name: Romy Ho <br>
+Student number: 11007303 <br>
 Minor Programming
 
 ## Introduction
