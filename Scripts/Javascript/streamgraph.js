@@ -38,8 +38,7 @@ var z = d3v2.scale.ordinal()
             .range(colorrange);
 
 // make dictionary
-  dataset = [{"key": "low", "values": []},{"key": "close", "values": []}, \
-  {"key": "open", "values": []},{"key": "high", "values": []}]
+  dataset = [{"key": "low", "values": []},{"key": "close", "values": []}, {"key": "open", "values": []},{"key": "high", "values": []}]
 
   var low = []
   var high = []
