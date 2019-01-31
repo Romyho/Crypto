@@ -11,6 +11,9 @@ The top 100 cryptocurrency website, is created to make crypto more visual. The v
 ![home](doc/report2.png)
 ![home](doc/report3.png)
 
+### Visual design
+The homepage has a navigation bar to change pages. Under the page there is a footer with personal information. The page contains a image of crypto currency logo's and a title. The next page at the navigation bar is the visualization page. This page contains 4 main elements, a bubble chart, a scatter plot, a stream graph and news articles links. It starts with the visualizations for all currencies, the bubble chart and scatterplot. Both have a tooltip with additional information about the bubbles or points. The bubble chart also has a time slider with a play function, that shows the growth of the crypto market over time. The bubble chart visualizes the market value of the currencies and the beginning of new currencies over time. The scatter plot visualizes the connexion between the beginning of the currency in the data and the current ranking. When clicked on one of the bubbles or points the window will show the second part of the page. This part contains a dropdown, title, stream graph and news article links. All will change for the chosen currency. The stream graph will show High, Low, Open and close rate for the dates of that currency. The news articles are selected for the chosen currency. 
+
 ### Technical design
 
 ##### Overview
@@ -157,4 +160,4 @@ The scatter plot is changed to ranking and begin date for all currencies and the
 #### Reflection
 The final result doesn't meet the expectations. The stream graph isn't a good visualization for this type of data, a candlestick chart is a better fit. Thus the visualizations should fit the data more. From the beginning there should be more research about fitting visualizations. For the styling of the page and code as well.
 
-The proposal needs to be more definite so the time could be better divided. More planning in advance, set deadlines for parts of the website. If the beginning is clean the whole code will be, don't wait till the last week to clean everything including the styling of the page. 
+The proposal needs to be more definite so the time could be better divided. More planning in advance, set deadlines for parts of the website. If the beginning is clean the whole code will be, don't wait till the last week to clean everything including the styling of the page.
